@@ -116,9 +116,7 @@ class ChatProvider with ChangeNotifier {
   }
 
   Future<String> getChatbotResponse(String message) async {
-    final model = GenerativeModel(
-        model: 'gemini-1.5-flash',
-        apiKey: 'AIzaSyDOARhUKq4jvlLIPjn9Qe-pqsJJHzaySbo');
+    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: '');
     final content = [Content.text(message)];
     final response = await model.generateContent(content);
     final data = response.text;
