@@ -14,7 +14,9 @@ class MainApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ChatProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: ChatScreen(),
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFFFFFF)),
       ),
     );
   }

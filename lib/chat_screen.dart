@@ -12,6 +12,7 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat'),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       ),
       body: Column(
         children: [
@@ -75,13 +76,19 @@ class ChatBubble extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-          color: isBot ? Colors.grey[200] : const Color.fromARGB(255, 0, 0, 0),
+          color: isBot
+              ? const Color(0xFFF8F7FB)
+              : const Color.fromARGB(255, 0, 0, 0),
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Text(
           message,
-          style: const TextStyle(
-              fontSize: 16.0, color: Color.fromARGB(255, 255, 255, 255)),
+          style: TextStyle(
+            fontSize: 16.0,
+            color: isBot ? Colors.black : Colors.white,
+
+            // color: Color.fromARGB(255, 255, 255, 255)
+          ),
         ),
       ),
     );
@@ -109,10 +116,11 @@ class ChatProvider with ChangeNotifier {
   }
 
   Future<String> getChatbotResponse(String message) async {
-    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: '');
+    final model = GenerativeModel(
+        model: 'gemini-1.5-flash',
+        apiKey: 'AIzaSyDOARhUKq4jvlLIPjn9Qe-pqsJJHzaySbo');
     final content = [Content.text(message)];
     final response = await model.generateContent(content);
-    print(response.text);
     final data = response.text;
 
     await Future.delayed(const Duration(seconds: 2)); // simulate network delay
